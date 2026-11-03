@@ -1,0 +1,367 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Agustin's PM Roadmap</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one drawing-sheet column. Title block, headline, plan ruler with per-pillar counters, then a single vertical timeline on a spine, solid for done work and dashed for planned work. */
+:root{
+  --paper:#ECEFF2;
+  --sheet:#F8F9FA;
+  --ink:#0F1923;
+  --ink2:#46535F;
+  --rule:#C6CED6;
+  --ai:#2B4EC2;
+  --ai-t:#DCE3F8;
+  --pm:#A34305;
+  --pm-t:#F6E1D3;
+  --base:#5B6773;
+  --base-t:#DFE4E8;
+  --font-display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --font-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0D141B;--sheet:#141D26;--ink:#E7ECF0;--ink2:#9AA7B3;--rule:#2B3743;
+    --ai:#8CA4FF;--ai-t:#1D2747;--pm:#F0975A;--pm-t:#3A2517;--base:#8A97A3;--base-t:#212B35;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0D141B;--sheet:#141D26;--ink:#E7ECF0;--ink2:#9AA7B3;--rule:#2B3743;
+  --ai:#8CA4FF;--ai-t:#1D2747;--pm:#F0975A;--pm-t:#3A2517;--base:#8A97A3;--base-t:#212B35;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font:400 16px/1.6 var(--font-body);
+  padding-block:28px 72px;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:880px;margin:0 auto;display:grid;gap:40px}
+
+/* Title block */
+.tb{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.tb>div{background:var(--sheet);padding:10px 14px;display:grid;gap:4px;min-width:0}
+.k{font:500 11px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.v{font:500 15px/1.35 var(--font-body)}
+@media (min-width:720px){.tb{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+/* Hero */
+h1{font:600 clamp(38px,8vw,64px)/1 var(--font-display);letter-spacing:-.005em;margin:0;text-wrap:balance}
+.lede{max-width:60ch;color:var(--ink2);font-size:17px;margin:18px 0 0}
+
+/* Plan panel */
+.plan{display:grid;gap:22px;background:var(--sheet);border:1px solid var(--rule);padding:20px}
+.ruler{position:relative;height:62px}
+.track{position:absolute;left:0;right:0;top:26px;height:8px;background:var(--paper);border:1px solid var(--rule)}
+.fill{position:absolute;left:0;top:0;bottom:0;background:var(--ink)}
+.tick{position:absolute;top:26px;height:16px;border-left:1px solid var(--ink2)}
+.tick span{position:absolute;top:20px;left:4px;font:500 11px/1 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+.today{position:absolute;top:16px;height:26px;border-left:2px solid var(--ink)}
+.today em{position:absolute;bottom:100%;left:0;transform:translateX(-50%);margin-bottom:2px;background:var(--ink);color:var(--paper);font:500 11px/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;padding:4px 6px;font-style:normal;white-space:nowrap}
+.today.l em{transform:none}
+.today.r em{transform:none;left:auto;right:-2px}
+.stat{margin:0;display:flex;flex-wrap:wrap;gap:4px 18px;font:500 13px/1.3 var(--font-mono);color:var(--ink2)}
+.stat b{color:var(--ink);font-weight:500}
+.meters{display:grid;gap:12px}
+.m{display:grid;grid-template-columns:72px minmax(0,1fr) auto;column-gap:12px;align-items:center}
+.ml{font:600 19px/1 var(--font-display);letter-spacing:.02em}
+.dots{display:flex;flex-wrap:wrap;gap:5px}
+.mc{font:500 12px/1 var(--font-mono);color:var(--ink2);white-space:nowrap}
+
+/* Status dots */
+.dot{display:inline-block;width:14px;height:14px;border-radius:50%;flex:none}
+.s-done{background:linear-gradient(135deg,var(--c1) 50%,var(--c2) 50%)}
+.s-doing{border:2px solid;border-color:var(--c1) var(--c2) var(--c2) var(--c1);background:linear-gradient(90deg,var(--c1) 50%,var(--paper) 50%)}
+.s-planned{border:2px solid;border-color:var(--c1) var(--c2) var(--c2) var(--c1);background:var(--paper)}
+
+/* Toolbar */
+.tlwrap{display:grid;gap:16px}
+.bar{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 13px/1 var(--font-mono);letter-spacing:.04em;padding:9px 13px;border:1px solid var(--rule);background:var(--sheet);color:var(--ink);border-radius:2px;cursor:pointer}
+.chip:hover{border-color:var(--ink2)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip:focus-visible,.ln:focus-visible{outline:2px solid var(--ai);outline-offset:2px}
+.legend{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 16px;font:500 12px/1 var(--font-mono);color:var(--ink2)}
+.legend li{display:inline-flex;align-items:center;gap:6px}
+.sw{display:inline-block;width:10px;height:10px}
+.sw.ai{background:var(--ai)}
+.sw.pm{background:var(--pm)}
+.sw.both{background:linear-gradient(135deg,var(--ai) 50%,var(--pm) 50%)}
+.sw.base{background:var(--base)}
+.count{margin:0;font:500 12px/1 var(--font-mono);color:var(--ink2)}
+
+/* Timeline */
+.tl{list-style:none;margin:0;padding:0;--wc:108px;--g:16px;--sx:calc(var(--wc) + var(--g) + 7px)}
+.row{position:relative;display:grid;grid-template-columns:var(--wc) 14px minmax(0,1fr);column-gap:var(--g);align-items:start;padding-bottom:32px}
+.row::before{content:"";position:absolute;left:var(--sx);top:0;bottom:0;border-left:1px solid var(--ink)}
+.row.p::before{border-left:1px dashed var(--ink2)}
+.row:first-child::before{top:12px}
+.row:last-child{padding-bottom:0}
+.row:last-child::before{bottom:auto;height:20px}
+.when{grid-column:1;grid-row:1;text-align:right;display:grid;gap:6px;font:500 13px/1.2 var(--font-mono);color:var(--ink);padding-top:2px}
+.st{font:500 11px/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+.node{grid-column:2;grid-row:1;margin-top:3px;position:relative;z-index:1;box-shadow:0 0 0 4px var(--paper)}
+.body{grid-column:3;grid-row:1;min-width:0}
+.tags{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}
+.type{font:500 11px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.pill{font:500 12px/1 var(--font-mono);letter-spacing:.04em;padding:4px 7px;border-radius:2px}
+.pill.ai{background:var(--ai-t);color:var(--ai)}
+.pill.pm{background:var(--pm-t);color:var(--pm)}
+.pill.base{background:var(--base-t);color:var(--ink2)}
+.body h3{font:600 18px/1.3 var(--font-body);margin:10px 0 4px}
+.body p{margin:0;max-width:62ch;color:var(--ink2);font-size:15px;line-height:1.6}
+.body .metric{display:inline-block;margin-top:10px;border:1px solid var(--rule);padding:3px 8px;font:500 12px/1.4 var(--font-mono);color:var(--ink)}
+.ln{display:inline-block;margin-top:10px;font:500 13px/1.4 var(--font-mono);color:var(--ai);text-decoration:underline;text-underline-offset:3px}
+.div{padding-bottom:22px}
+.div h2{grid-column:3;grid-row:1;margin:0;display:flex;align-items:baseline;gap:12px;font:600 24px/1 var(--font-display);letter-spacing:.01em}
+.div h2::after{content:"";flex:1;border-top:1px solid var(--rule);align-self:center}
+.div h2 small{font:500 12px/1 var(--font-mono);letter-spacing:.04em;color:var(--ink2)}
+.div::after{content:"";grid-column:2;grid-row:1;align-self:center;width:14px;height:2px;background:var(--ink);position:relative;z-index:1}
+.tdy{padding-bottom:26px}
+.tnode{width:10px;height:10px;background:var(--ink);transform:rotate(45deg);margin:6px 0 0 2px}
+.tline{display:flex;align-items:center;gap:12px;font:500 12px/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);padding-top:5px}
+.tline::after{content:"";flex:1;border-top:2px solid var(--ink)}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;border-top:1px solid var(--rule);padding-top:16px;font:400 12px/1.4 var(--font-mono);color:var(--ink2)}
+
+@media (max-width:560px){
+  .plan{padding:16px}
+  .m{grid-template-columns:64px minmax(0,1fr) auto}
+  .tl{--g:14px;--sx:7px}
+  .row{grid-template-columns:14px minmax(0,1fr)}
+  .when{grid-column:2;grid-row:1;text-align:left;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+  .node{grid-column:1;grid-row:1;margin-top:1px}
+  .body{grid-column:2;grid-row:2;padding-top:8px}
+  .tdy .body{grid-row:1;padding-top:0}
+  .tnode{margin-top:4px}
+  .div h2{grid-column:2}
+  .div::after{grid-column:1}
+}
+</style>
+
+<div class="wrap">
+  <header class="tb" aria-label="Document details">
+    <div><span class="k">Name</span><span class="v">Agustin</span></div>
+    <div><span class="k">Subject</span><span class="v">Roadmap to product management</span></div>
+    <div><span class="k">Plan</span><span class="v">Oct 2026 to Apr 2027</span></div>
+    <div><span class="k">Last update</span><span class="v" id="tb-upd">-</span></div>
+  </header>
+
+  <section class="hero">
+    <h1>Industrial engineer becoming a product manager, building with AI in public.</h1>
+    <p class="lede">I'm moving into product management by building real things, with AI as a core skill and tool. This page is the log: what I shipped, what I decided, and what comes next.</p>
+  </section>
+
+  <section class="plan" aria-labelledby="plan-h">
+    <h2 id="plan-h" class="sr">Plan progress</h2>
+    <div class="ruler" id="ruler" role="img"></div>
+    <p class="stat" id="stat"></p>
+    <div class="meters" id="meters"></div>
+  </section>
+
+  <section class="tlwrap" aria-labelledby="tl-h">
+    <h2 id="tl-h" class="sr">Timeline</h2>
+    <div class="bar">
+      <div class="chips" role="group" aria-label="Filter by pillar">
+        <button class="chip" type="button" data-f="all" aria-pressed="true">All</button>
+        <button class="chip" type="button" data-f="ai" aria-pressed="false">AI</button>
+        <button class="chip" type="button" data-f="pm" aria-pressed="false">Product</button>
+      </div>
+      <ul class="legend" aria-label="Legend">
+        <li><span class="dot s-done" style="--c1:var(--ink);--c2:var(--ink)"></span>Done</li>
+        <li><span class="dot s-doing" style="--c1:var(--ink);--c2:var(--ink)"></span>In progress</li>
+        <li><span class="dot s-planned" style="--c1:var(--ink);--c2:var(--ink)"></span>Planned</li>
+        <li><span class="sw ai"></span>AI</li>
+        <li><span class="sw pm"></span>Product</li>
+        <li><span class="sw both"></span>Both</li>
+        <li><span class="sw base"></span>Background</li>
+      </ul>
+    </div>
+    <p class="count" id="count" aria-live="polite"></p>
+    <ol class="tl" id="tl"></ol>
+  </section>
+
+  <footer class="foot">
+    <span>Roadmap v1 · Built with Claude</span>
+    <span id="upd"></span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var PLAN={start:"2026-10-01",end:"2027-04-30"};
+
+  /* Each entry has: date (sort key, YYYY-MM-DD), when (label shown), status (done | doing | planned),
+     type (decision | deliverable | learning | teardown | impact | feedback | badge),
+     pillars (ai | pm | base), title, text.
+     Optional: metric (a result in numbers), link {label, url}, earlier:true (happened before the plan). */
+  var ENTRIES=[
+    {earlier:true,when:"Earlier",status:"done",type:"impact",pillars:["base"],
+      title:"First employee at a startup",
+      text:"Joined a startup as its first employee."},
+    {earlier:true,when:"Earlier",status:"done",type:"impact",pillars:["base"],
+      title:"Production tracking system at a factory",
+      text:"At a mid-sized factory, improved processes and designed and programmed a system to keep a record of the production process."},
+
+    {date:"2026-10-27",when:"Oct 2026",status:"done",type:"decision",pillars:["pm"],
+      title:"Chose product management",
+      text:"Decided to move from industrial engineering into product management, and wrote a plan to April 2027 around two pillars: AI and product management."},
+    {date:"2026-11-03",when:"3 Nov 2026",status:"done",type:"decision",pillars:["ai","pm"],
+      title:"Build first, learn as needed",
+      text:"Start real projects now and study each concept when a project needs it, instead of finishing a course first."},
+    {date:"2026-11-03",when:"3 Nov 2026",status:"done",type:"deliverable",pillars:["ai","pm"],
+      title:"Roadmap page, first version",
+      text:"This page. Built in one session with Claude, with every entry stored as data so adding a milestone takes a few lines."},
+    {date:"2026-11-03",when:"Nov 2026",status:"doing",type:"learning",pillars:["ai"],
+      title:"AI concepts, learned by building",
+      text:"Learn each AI concept when a project needs it, and publish a short note on what I learned."},
+
+    {date:"2026-12-05",when:"Dec 2026",status:"planned",type:"learning",pillars:["pm"],
+      title:"PM fundamentals, learned by building",
+      text:"Learn the basics each project calls for, such as prioritization, roadmaps, and writing a product requirements document. Short notes go on this page."},
+    {date:"2026-12-20",when:"Dec 2026",status:"planned",type:"deliverable",pillars:["ai"],
+      title:"First AI agent in use",
+      text:"An agent that solves a real problem from my own routine, with a short write-up of the choices I made."},
+    {date:"2027-01-10",when:"Jan 2027",status:"planned",type:"teardown",pillars:["pm"],
+      title:"First product teardown",
+      text:"A one-page analysis of a real product: who it is for, what works, and what I would change."},
+    {date:"2027-01-25",when:"Jan 2027",status:"planned",type:"feedback",pillars:["ai","pm"],
+      title:"A project tested with real users",
+      text:"Three people use something I built. Their feedback, and what I changed because of it, goes on this page."},
+    {date:"2027-02-15",when:"Feb 2027",status:"planned",type:"impact",pillars:["pm"],
+      title:"Factory system as a product case",
+      text:"Retell the production tracking system as a product case: the problem, the users, the trade-offs, and the results."},
+    {date:"2027-03-10",when:"Mar 2027",status:"planned",type:"feedback",pillars:["pm"],
+      title:"Conversations with working PMs",
+      text:"Talk with product managers about the role and the market, and record what I learn and what changes in my plan."},
+    {date:"2027-04-01",when:"Apr 2027",status:"planned",type:"decision",pillars:["pm"],
+      title:"Start the job search in Barcelona",
+      text:"Begin looking for product manager roles in Barcelona, in person."}
+  ];
+
+  var MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  var TYPE={decision:"Decision",deliverable:"Deliverable",learning:"Learning",teardown:"Teardown",impact:"Impact",feedback:"Feedback",badge:"Badge"};
+  var PILL={ai:"AI",pm:"Product",base:"Background"};
+  var STAT={done:"Done",doing:"In progress",planned:"Planned"};
+
+  function parse(s){var a=s.split("-");return new Date(+a[0],+a[1]-1,+a[2]);}
+  function pad(n){return (n<10?"0":"")+n;}
+  function iso(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());}
+  function fmt(d){return d.getDate()+" "+MON[d.getMonth()]+" "+d.getFullYear();}
+  function fmtM(d){return MON[d.getMonth()]+" "+d.getFullYear();}
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+  function col(p){return p==="ai"?"var(--ai)":p==="pm"?"var(--pm)":"var(--base)";}
+  function colors(e){return "--c1:"+col(e.pillars[0])+";--c2:"+col(e.pillars[1]||e.pillars[0]);}
+
+  var DAY=864e5;
+  var today=new Date();today.setHours(0,0,0,0);
+  var start=parse(PLAN.start),end=parse(PLAN.end);
+  var total=Math.round((end-start)/DAY);
+  var elapsed=Math.round((today-start)/DAY);
+  var pct=Math.max(0,Math.min(1,elapsed/total))*100;
+  var dayN=Math.max(1,Math.min(total,elapsed+1));
+
+  var earlier=ENTRIES.filter(function(e){return e.earlier;});
+  var plan=ENTRIES.filter(function(e){return !e.earlier;}).map(function(e,i){e._i=i;return e;}).sort(function(a,b){
+    return a.date<b.date?-1:a.date>b.date?1:a._i-b._i;
+  });
+
+  /* Ruler */
+  var r='<div class="track"><i class="fill" style="width:'+pct.toFixed(2)+'%"></i></div>';
+  var d=new Date(start.getFullYear(),start.getMonth(),1);
+  while(d<=end){
+    var left=Math.max(0,(d-start)/(end-start)*100);
+    r+='<span class="tick" style="left:'+left.toFixed(2)+'%"><span>'+MON[d.getMonth()]+'</span></span>';
+    d=new Date(d.getFullYear(),d.getMonth()+1,1);
+  }
+  var side=pct<9?" l":pct>91?" r":"";
+  r+='<span class="today'+side+'" style="left:'+pct.toFixed(2)+'%"><em>Today</em></span>';
+  var ruler=document.getElementById("ruler");
+  ruler.innerHTML=r;
+  ruler.setAttribute("aria-label","Day "+dayN+" of "+total+" of the plan, from "+fmt(start)+" to "+fmt(end));
+
+  /* Stats */
+  var cnt={done:0,doing:0,planned:0};
+  plan.forEach(function(e){cnt[e.status]++;});
+  document.getElementById("stat").innerHTML=
+    '<span>Day <b>'+dayN+'</b> of '+total+'</span>'+
+    '<span><b>'+cnt.done+'</b> done</span>'+
+    '<span><b>'+cnt.doing+'</b> in progress</span>'+
+    '<span><b>'+cnt.planned+'</b> planned</span>';
+
+  /* Pillar meters: one dot per entry */
+  var mh="";
+  [["ai","AI"],["pm","Product"]].forEach(function(p){
+    var list=plan.filter(function(e){return e.pillars.indexOf(p[0])>-1;});
+    var done=list.filter(function(e){return e.status==="done";}).length;
+    mh+='<div class="m"><span class="ml">'+p[1]+'</span><span class="dots">'+
+      list.map(function(e){return '<span class="dot s-'+e.status+'" style="--c1:var(--'+p[0]+');--c2:var(--'+p[0]+')" title="'+esc(e.title)+'"></span>';}).join("")+
+      '</span><span class="mc">'+done+' of '+list.length+'</span></div>';
+  });
+  document.getElementById("meters").innerHTML=mh;
+
+  /* Timeline rows */
+  function divider(label,sub){
+    return '<li class="row d div"><h2>'+esc(label)+(sub?'<small>'+esc(sub)+'</small>':'')+'</h2></li>';
+  }
+  function todayRow(){
+    return '<li class="row d tdy"><span class="node tnode"></span><div class="body tline">Today, '+fmt(today)+'</div></li>';
+  }
+  function entry(e,isPlan){
+    var tags='<span class="type">'+TYPE[e.type]+'</span>'+e.pillars.map(function(p){return '<span class="pill '+p+'">'+PILL[p]+'</span>';}).join("");
+    var h='<li class="row ev '+(e.status==="planned"?"p":"d")+'"'+(isPlan?' data-plan="1"':'')+' data-p="'+e.pillars.join(" ")+'">';
+    h+='<div class="when"><span>'+esc(e.when)+'</span><span class="st">'+STAT[e.status]+'</span></div>';
+    h+='<span class="dot node s-'+e.status+'" style="'+colors(e)+'"></span>';
+    h+='<div class="body"><div class="tags">'+tags+'</div><h3>'+esc(e.title)+'</h3><p>'+esc(e.text)+'</p>';
+    if(e.metric)h+='<p class="metric">'+esc(e.metric)+'</p>';
+    if(e.link)h+='<a class="ln" href="'+esc(e.link.url)+'" target="_blank" rel="noopener">'+esc(e.link.label)+' &rarr;</a>';
+    return h+'</div></li>';
+  }
+
+  var rows=[];
+  if(earlier.length){
+    rows.push(divider("Before the plan"));
+    earlier.forEach(function(e){rows.push(entry(e,false));});
+  }
+  rows.push(divider("The plan",fmtM(start)+" to "+fmtM(end)));
+  var ti=iso(today),marked=false;
+  plan.forEach(function(e){
+    if(!marked&&e.date>ti){rows.push(todayRow());marked=true;}
+    rows.push(entry(e,true));
+  });
+  if(!marked)rows.push(todayRow());
+  document.getElementById("tl").innerHTML=rows.join("");
+
+  /* Last update = latest done entry in the plan */
+  var lastDone=plan.filter(function(e){return e.status==="done";}).map(function(e){return e.date;}).sort().pop();
+  var upd=lastDone?fmt(parse(lastDone)):"-";
+  document.getElementById("tb-upd").textContent=upd;
+  document.getElementById("upd").textContent="Last update: "+upd;
+
+  /* Pillar filter (applies to plan entries only) */
+  var chips=document.querySelectorAll(".chip");
+  var countEl=document.getElementById("count");
+  function apply(f){
+    var shown=0,tot=0;
+    document.querySelectorAll("#tl [data-plan]").forEach(function(li){
+      tot++;
+      var ok=f==="all"||(" "+li.getAttribute("data-p")+" ").indexOf(" "+f+" ")>-1;
+      li.hidden=!ok;
+      if(ok)shown++;
+    });
+    chips.forEach(function(c){c.setAttribute("aria-pressed",c.getAttribute("data-f")===f?"true":"false");});
+    countEl.textContent=f==="all"?tot+" entries in the plan":shown+" of "+tot+" entries in the plan";
+  }
+  chips.forEach(function(c){c.addEventListener("click",function(){apply(c.getAttribute("data-f"));});});
+  apply("all");
+})();
+</script>
+
+</body></html>
